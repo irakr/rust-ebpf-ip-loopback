@@ -53,7 +53,6 @@ pub fn ip_loopback(ctx: XdpContext) -> u32 {
 }
 
 fn try_ip_loopback(ctx: XdpContext) -> Result<u32, u32> {
-    // info!(&ctx, "received a packet");
 
     let eth = ptr_at_mut::<EthHdr>(&ctx, 0).ok_or(xdp_action::XDP_PASS)?;
 
@@ -67,6 +66,7 @@ fn try_ip_loopback(ctx: XdpContext) -> Result<u32, u32> {
         return Ok(xdp_action::XDP_PASS);
     }
 
+    // We process only those packets with UDP destination port 15000.
     // Let other unintended packets pass through.
     let udp = ptr_at::<UdpHdr>(&ctx, ETH_HDR_LEN + IP_HDR_LEN).ok_or(xdp_action::XDP_PASS)?;
     if unsafe { (*udp).dest } != 15000u16.to_be() {
@@ -96,7 +96,6 @@ fn try_ip_loopback(ctx: XdpContext) -> Result<u32, u32> {
         computed_checksum
     );
 
-    // TODO:
     // Modify the packet:
     // - Swap the source and destination IPv4 addresses.
     // - Swap the source and destination MAC addresses as well,

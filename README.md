@@ -5,6 +5,15 @@ checksum update is handled for an IPv4 packet.
 
 **NOTE: This is not a UDP ping.**
 
+The algorithm is simple:
+- A packet enters the host's NIC where this ebpf program is running.
+- The ebpf program receives the packet via XDP.
+- The ebpf program checks if the packet is UDP with destination port 15000.
+- Then it swaps the IPv4 source and destination addresses in the IP header.
+- And also swaps the ethernet source and destination addresses in the ETH header.
+- Then ofcourse it recalculates the IP header checksum and updates it in the packet.
+- Sends the packet back out to the NIC using XDP_TX.
+
 ## Prerequisites
 
 1. Setup dev environment for aya-rust:
