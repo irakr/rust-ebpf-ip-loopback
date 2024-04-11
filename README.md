@@ -41,6 +41,9 @@ checksum update is handled for an IPv4 packet.
 Lets consider two hosts in your LAN:
 - **192.168.1.22**: Where the ip-loopback ebpf program will be run.
 - **192.168.1.33**: Another host that wants its UDP packets loopback'ed.
+- The hard-coded UDP port 15000: It is used for isolating only the packets with destination UDP port 15000 to be loopback'ed.
+  This is because, otherwise, every packet will be loopback'ed and it may make your ebpf host unreachable once you start the program.
+  If you want you can change this by modifying the source file ***ip-loopback-ebpf/src/main.rs***
 
 1. Run the ip-loopback ebpf program:
     ```
