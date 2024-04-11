@@ -1,0 +1,7 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "Cargo.toml",
+    "ip-loopback-ebpf/Cargo.toml",
+    "./ip-loopback-common/Cargo.toml"
+  ]
+}

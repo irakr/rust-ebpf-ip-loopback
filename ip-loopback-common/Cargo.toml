@@ -1,0 +1,17 @@
+[package]
+name = "ip-loopback-common"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+user = ["aya"]
+
+[dependencies]
+aya = { git = "https://github.com/aya-rs/aya", optional = true }
+aya-ebpf = { git = "https://github.com/aya-rs/aya" }
+aya-log-ebpf = { git = "https://github.com/aya-rs/aya" }
+network-types = "0.0.5"
+
+[lib]
+path = "src/lib.rs"
