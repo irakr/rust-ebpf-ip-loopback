@@ -3,6 +3,8 @@ An example of IP loopback implementation using aya-rust ebpf library.
 This example demonstrates how a packet modification and respective
 checksum update is handled for an IPv4 packet.
 
+**NOTE: This is not a UDP ping.**
+
 ## Prerequisites
 
 1. Setup dev environment for aya-rust:
